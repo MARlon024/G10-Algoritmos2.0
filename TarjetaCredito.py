@@ -6,7 +6,7 @@ class Generar_tarjeta():
 		self.BIN = BIN.replace(" ","")
 
 		#Generación de tarjeta
-		print("Datos de la nueva tarjeta")
+		print("Datos de la tarjeta creada")
 		self.lista_tarjetas = []
 		self.dic_tarjetas = {}
 		tarj_creada = self.crear_tarjeta()
