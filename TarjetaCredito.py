@@ -84,3 +84,6 @@ class Generar_tarjeta():
 
 bin_muestra = "4509xxxxxxxxxxxx"  #BIN Visa
 num = Generar_tarjeta(bin_muestra)
+with open("tarjetas_creadas.txt", "a") as contenido:
+	contenido.write(str(num.lista_tarjetas))
+	contenido.close()
