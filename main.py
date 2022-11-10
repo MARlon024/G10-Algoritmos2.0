@@ -16,8 +16,11 @@ while(continuar):
                             transferencia.operacion('19145078912346', cuenta, monto)  # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
                             print("¡Transacción completada!\n")
                             fecha, hora = funciones.obtenerTiempo()
-                            funciones.mostrarTransferencia(cuenta, monto, fecha, hora)
-                            lista = funciones.exportarTransferencia('19145078912346', cuenta, monto, fecha, hora)  # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
+                            ID = "1" + funciones.crearID()
+                            while(transferencia.existeID(ID)):
+                                ID = "1" + funciones.crearID()
+                            funciones.mostrarTransferencia(cuenta, monto, ID, fecha, hora)
+                            lista = funciones.exportarTransferencia(ID, '19145078912346', cuenta, monto, fecha, hora)  # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
                             transferencia.mandarDatos(lista)
                             transferencia.cerrarConexion()
                             continue
@@ -35,9 +38,12 @@ while(continuar):
                         retiro.operacion('19145078912346',monto) # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
                         print("¡Retiro completado!\n")
                         fecha, hora = funciones.obtenerTiempo()
+                        ID = "2" + funciones.crearID()
+                        while(retiro.existeID(ID)):
+                            ID = "2" + funciones.crearID()
                         saldo = retiro.obtenerSaldo('19145078912346') # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
-                        funciones.mostrarRetiro(monto, saldo, fecha, hora)
-                        lista = funciones.exportarRetiro('19145078912346', monto, fecha, hora) # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
+                        funciones.mostrarRetiro(monto, saldo, ID, fecha, hora)
+                        lista = funciones.exportarRetiro(ID,'19145078912346', monto, fecha, hora) # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
                         retiro.mandarDatos(lista)
                         retiro.cerrarConexion()
                         continue
@@ -45,6 +51,12 @@ while(continuar):
                         continue
                 except ValueError:
                     print("\n ERROR: No puede ingresar variables que no sean números \n")
+                continue
+            case 3:
+                # IMPRIMIR DEUDAS SEGÚN N° CUENTA
+                # INGRESAR ID DE DEUDA
+                # COMPLETADO - DEVOLVER DETALLES
+                # EXPORTAR A BBDD
                 continue
             case 0:
                 continuar = False

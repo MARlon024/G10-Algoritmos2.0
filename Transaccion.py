@@ -33,6 +33,9 @@ class Transaccion:
         saldo = cursor.fetchall()[0][0]
         return saldo
 
+    def existeID(self, ID):
+        pass
+
     def operacion(self):
         pass
 
@@ -56,10 +59,18 @@ class Transferencia(Transaccion):
 
     def mandarDatos(self, lista):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute("INSERT INTO TRANSACCIONES VALUES(?,?,?,?,?)", lista)
+        cursor.execute("INSERT INTO TRANSFERENCIAS VALUES(?,?,?,?,?,?)", lista)
         self.conexionCuentas.commit()
 
-
+    def existeID(self, ID):
+        cursor = self.conexionCuentas.cursor()
+        cursor.execute(f"SELECT * FROM TRANSFERENCIAS WHERE ID_OPERACION={ID}")
+        comprobacion = cursor.fetchall()
+        if(comprobacion == []):
+            existe = False
+        else:
+            existe = True
+        return existe
 
 
 class Retiro(Transaccion):
@@ -70,5 +81,19 @@ class Retiro(Transaccion):
 
     def mandarDatos(self, lista):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute("INSERT INTO RETIROS VALUES(?,?,?,?)",lista)
+        cursor.execute("INSERT INTO RETIROS VALUES(?,?,?,?,?)",lista)
         self.conexionCuentas.commit()
+
+    def existeID(self, ID):
+        cursor = self.conexionCuentas.cursor()
+        cursor.execute(f"SELECT * FROM RETIROS WHERE ID_OPERACION={ID}")
+        comprobacion = cursor.fetchall()
+        if(comprobacion == []):
+            existe = False
+        else:
+            existe = True
+        return existe
+
+class pagoServicios(Transaccion):
+    def operacion(self):
+        pass
