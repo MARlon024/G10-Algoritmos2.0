@@ -53,6 +53,7 @@ while(continuar):
                     print("\n ERROR: No puede ingresar variables que no sean números \n")
                 continue
             case 3:
+                print("Bienvenido")
                 # IMPRIMIR DEUDAS SEGÚN N° CUENTA
                 # INGRESAR ID DE DEUDA
                 # COMPLETADO - DEVOLVER DETALLES
