@@ -1,7 +1,7 @@
 import datetime
 from random import randint
 def menuPrincipal():
-    print("\t \t  Bienvenido al panel de transacciones. Ingrese la opción a continuar: \n 1. Transferencia \n 2. Retiro \n 3. Pago de servicios \n 0. Salir")
+    print("\t \t  Bienvenido al panel de transacciones. Ingrese la opción a continuar: \n 1. Depósito \n 2. Transferencia \n 3. Retiro \n 4. Pago de servicios \n 0. Salir")
     opc = int(input("\n"))
     return opc
 
@@ -16,6 +16,16 @@ def ingresoCuenta(cuentaInicial):
         if(cuentaDestino == cuentaInicial):
             print("No puede transferirse a usted mismo... \n ")
     return cuentaDestino
+
+def ingresoDeuda():
+    codigoDeuda = ""
+    while (len(codigoDeuda) != 10 or codigoDeuda.isnumeric() == False):
+        codigoDeuda = input("Introduzca el código de deuda a pagar: \n")
+        if (len(codigoDeuda) != 10):
+            print("La cuenta debe contener 10 dígitos... \n")
+        if (codigoDeuda.isnumeric() == False):
+            print("Debe ingresar solo números... \n")
+    return codigoDeuda
 
 def obtenerTiempo():
     ahora = datetime.datetime.now()
@@ -37,6 +47,26 @@ def mostrarRetiro(monto, saldo, ID, fecha, hora):
     print(f"\t \t {fecha} \t \t {hora}\n")
     print(f"\t NÚMERO DE OPERACIÓN: {ID} \n \n")
 
+def mostrarDeudas(deudas):
+    print("\n \n Bienvenido. A continuación se muestran sus deudas:")
+    print("CODIGO DE DEUDA: \t \t \t EMPRESA: \t \t \t MONTO: \t \t \t FECHA VENCIMIENTO:")
+    for i in deudas:
+        print(f"{i[0]} \t \t \t \t \t {i[1]} \t \t \t \t {i[2]} \t \t \t \t {i[3]}")
+
+def mostrarServicio(ID, fecha, hora):
+    print(f"\t \t ID DE OPERACIÓN: \n \t \t {ID} \n")
+    print(" \t \t \t FECHA:")
+    print(f"\t \t {fecha} \t \t {hora}\n \n")
+
+def mostrarDeposito(ID, monto, fecha, hora):
+    print(f"\t \t Usted ha depositado: \t \t {monto}\n")
+    print(f"\t \t ID de operación: \t \t {ID} \n")
+    print(f"\t \t FECHA:")
+    print(f"\t \t {fecha} \t \t \t {hora}")
+
+def exportarDeposito(ID, cuenta, monto, fecha, hora):
+    lista = [ID, cuenta, monto, fecha, hora]
+    return lista
 def exportarTransferencia( ID, cuentaInicial, cuentaDestino, monto, fecha, hora):
     lista = [ID, cuentaInicial, cuentaDestino, monto, fecha, hora]
     return lista
@@ -45,9 +75,14 @@ def exportarRetiro(ID, cuenta, monto, fecha, hora):
     lista = [ID, cuenta, monto, fecha, hora]
     return lista
 
+def exportarServicio(ID, codigoDeuda, cuenta, monto, fecha, hora):
+    lista = [ID, codigoDeuda, cuenta, monto, fecha, hora]
+    return lista
+
 def crearID():
     ID = ""
     for i in range(9):
         p = str(randint(0, 9))
         ID = ID + p
     return ID
+

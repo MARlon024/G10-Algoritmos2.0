@@ -8,8 +8,8 @@ class Transaccion:
     def montoValido(self, monto, cuenta):
         cursor = self.conexionCuentas.cursor()
         cursor.execute(f"SELECT SALDO FROM CUENTA WHERE NUMERO_CUENTA={cuenta}")
-        saldo = cursor.fetchall()[0][0]
-        if(saldo>=monto):
+        self.saldo = cursor.fetchall()[0][0]
+        if(self.saldo>=monto):
             valido = True
         else:
             print("Su cuenta no dispone del saldo suficiente para realizar esta transacción... \n")
@@ -19,8 +19,8 @@ class Transaccion:
     def existeCuenta(self, cuenta):
         cursor = self.conexionCuentas.cursor()
         cursor.execute(f"SELECT * FROM CUENTA WHERE NUMERO_CUENTA={cuenta}")
-        confirmacion = cursor.fetchall()
-        if(confirmacion==[]):
+        self.confirmacion = cursor.fetchall()
+        if(self.confirmacion==[]):
             print("No se ha encontrado la cuenta.")
             existe = False
         else:
@@ -39,6 +39,9 @@ class Transaccion:
     def operacion(self):
         pass
 
+    def mandarDatos(self, lista):
+        pass
+
     def cerrarConexion(self):
         self.conexionCuentas.close()
 
@@ -46,6 +49,16 @@ class Transaccion:
 
 
 
+class Deposito(Transaccion):
+    def operacion(self, monto, cuenta):
+        cursor = self.conexionCuentas.cursor()
+        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO+{monto} WHERE NUMERO_CUENTA={cuenta}")
+        self.conexionCuentas.commit()
+
+    def mandarDatos(self, lista):
+        cursor = self.conexionCuentas.cursor()
+        cursor.execute("INSERT INTO DEPOSITO VALUES(?,?,?,?,?)", lista)
+        self.conexionCuentas.commit()
 
 class Transferencia(Transaccion):
 
@@ -65,8 +78,8 @@ class Transferencia(Transaccion):
     def existeID(self, ID):
         cursor = self.conexionCuentas.cursor()
         cursor.execute(f"SELECT * FROM TRANSFERENCIAS WHERE ID_OPERACION={ID}")
-        comprobacion = cursor.fetchall()
-        if(comprobacion == []):
+        self.comprobacion = cursor.fetchall()
+        if(self.comprobacion == []):
             existe = False
         else:
             existe = True
@@ -87,13 +100,48 @@ class Retiro(Transaccion):
     def existeID(self, ID):
         cursor = self.conexionCuentas.cursor()
         cursor.execute(f"SELECT * FROM RETIROS WHERE ID_OPERACION={ID}")
-        comprobacion = cursor.fetchall()
-        if(comprobacion == []):
+        self.comprobacion = cursor.fetchall()
+        if(self.comprobacion == []):
             existe = False
         else:
             existe = True
         return existe
 
 class pagoServicios(Transaccion):
-    def operacion(self):
-        pass
+
+    def __init__(self, cuenta):
+        super().__init__()
+        self.cuenta = cuenta
+    def operacion(self, cuenta, monto, codigoDeuda):
+        cursor = self.conexionCuentas.cursor()
+        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO-{monto} WHERE NUMERO_CUENTA={cuenta}")
+        self.conexionCuentas.commit()
+        cursor.execute(f"DELETE FROM SERVICIOS WHERE CODIGO_DEUDA = {codigoDeuda}")
+        self.conexionCuentas.commit()
+
+    def devolverDeudas(self):
+        cursor = self.conexionCuentas.cursor()
+        cursor.execute(f"SELECT CODIGO_DEUDA, EMPRESA, MONTO, FECHA_VENCIMIENTO FROM SERVICIOS WHERE CUENTA={self.cuenta}")
+        deudas = cursor.fetchall()
+        return deudas
+
+    def mandarDatos(self, lista):
+        cursor = self.conexionCuentas.cursor()
+        cursor.execute("INSERT INTO PAGOSERV VALUES(?,?,?,?,?,?)", lista)
+        self.conexionCuentas.commit()
+
+    def deudaMonto(self, codigoDeuda):
+        cursor = self.conexionCuentas.cursor()
+        cursor.execute(f"SELECT MONTO FROM SERVICIOS WHERE CODIGO_DEUDA={codigoDeuda}")
+        monto = cursor.fetchall()[0][0]
+        return monto
+
+    def existeID(self, ID):
+        cursor = self.conexionCuentas.cursor()
+        cursor.execute(f"SELECT * FROM SERVICIOS WHERE CODIGO_DEUDA={ID}")
+        self.comprobacion = cursor.fetchall()
+        if (self.comprobacion == []):
+            existe = False
+        else:
+            existe = True
+        return existe

@@ -13,9 +13,6 @@ cursor.execute(f"INSERT INTO TRANSACCIONES VALUES('190','191',290, '{diaActual}'
 cn.commit()'''
 
 
-
-
-
 # CREACIONES DE TABLAS:
 
 ''' CREAR TABLA DE TRANSFERENCIAS:
@@ -30,15 +27,23 @@ cursor = cn.cursor()
 cursor.execute(f"CREATE TABLE RETIROS(ID_OPERACION VARCHAR(50) PRIMARY KEY UNIQUE, CUENTA VARCHAR(50), MONTO FLOAT, FECHA DATE, HORA TIME)")
 cn.commit()'''
 
-
-
 ''' CREAR TABLA DE SERVICIOS:
 cn = sqlite3.Connection("Cuentas")
 cursor = cn.cursor()
 cursor.execute(f"CREATE TABLE SERVICIOS(CODIGO_DEUDA VARCHAR(50) PRIMARY KEY UNIQUE, EMPRESA VARCHAR(50), CUENTA VARCHAR(50), MONTO FLOAT, FECHA_VENCIMIENTO DATE)")
 cn.commit()'''
 
+''' CREAR TABLA DE PAGO DE SERVICIOS:
+cn = sqlite3.Connection("Cuentas")
+cursor = cn.cursor()
+cursor.execute(f"CREATE TABLE PAGOSERV(ID_OPERACION VARCHAR(50) PRIMARY KEY UNIQUE, ID_DEUDA VARCHAR(50) UNIQUE, CUENTA VARCHAR(50), MONTO FLOAT, FECHA DATE, HORA TIME)")
+cn.commit()'''
 
+'''CREAR TABLA DE DEPOSITO:
+cn = sqlite3.Connection("Cuentas")
+cursor = cn.cursor()
+cursor.execute(f"CREATE TABLE DEPOSITO(ID_OPERACION VARCHAR(50) PRIMARY KEY UNIQUE, CUENTA VARCHAR(50), MONTO FLOAT, FECHA DATE, HORA TIME)")
+cn.commit()'''
 
 '''cn = sqlite3.Connection("Cuentas")
 cursor = cn.cursor()

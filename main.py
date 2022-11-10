@@ -8,6 +8,27 @@ while(continuar):
         opc = funciones.menuPrincipal()
         match(opc):
             case 1:
+                deposito = Transaccion.Deposito()
+                try:
+                    monto = float(input("Ingrese el monto a depositar \n"))
+                    if(deposito.montoValido(monto,'19145078912346')): # REEMPLAZAR
+                        deposito.operacion(monto, '19145078912346') # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
+                        print("¡Depósito completado! \n")
+                        fecha, hora = funciones.obtenerTiempo()
+                        ID = "0" + funciones.crearID()
+                        while (deposito.existeID(ID)):
+                            ID = "0" + funciones.crearID()
+                        funciones.mostrarDeposito(ID, monto, fecha, hora)
+                        lista = funciones.exportarDeposito(ID, '19145078912346',monto, fecha, hora)
+                        deposito.mandarDatos(lista)
+                        deposito.cerrarConexion()
+                        continue
+                    else:
+                        continue
+                except ValueError:
+                    print("\n ERROR: No puede ingresar variables que no sean números \n")
+                continue
+            case 2:
                 transferencia = Transaccion.Transferencia()
                 cuenta = funciones.ingresoCuenta('19145078912346') #REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
                 if(transferencia.existeCuenta(cuenta)):
@@ -31,7 +52,7 @@ while(continuar):
                         print("\n ERROR: No puede ingresar variables que no sean números \n")
                 else:
                     continue
-            case 2:
+            case 3:
                 retiro = Transaccion.Retiro()
                 try:
                     monto = float(input("Ingrese el monto a retirar \n"))
@@ -53,12 +74,33 @@ while(continuar):
                 except ValueError:
                     print("\n ERROR: No puede ingresar variables que no sean números \n")
                 continue
-            case 3:
-                print("Bienvenido")
-                # IMPRIMIR DEUDAS SEGÚN N° CUENTA
-                # INGRESAR ID DE DEUDA
-                # COMPLETADO - DEVOLVER DETALLES
-                # EXPORTAR A BBDD
+            case 4:
+                pagoServicios = Transaccion.pagoServicios('19145078912346') #REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE!!!
+                deudas = pagoServicios.devolverDeudas()
+                funciones.mostrarDeudas(deudas)
+                try:
+                    codigoDeuda = funciones.ingresoDeuda()
+                    if (not pagoServicios.existeID(codigoDeuda)):
+                        print("\n Este codigo no existe...\n \n")
+                        continue
+                    else:
+                        monto = pagoServicios.deudaMonto(codigoDeuda)
+                        if(pagoServicios.montoValido(monto,'19145078912346')): # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
+                            pagoServicios.operacion('19145078912346',monto, codigoDeuda) # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
+                            print("¡Servicio cancelado! \n")
+                            fecha, hora = funciones.obtenerTiempo()
+                            ID = "3" + funciones.crearID()
+                            while(pagoServicios.existeID(ID)):
+                                ID = "3" + funciones.crearID()
+                            funciones.mostrarServicio(ID, fecha, hora)
+                            lista = funciones.exportarServicio(ID, codigoDeuda, '19145078912346', monto, fecha, hora) # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
+                            pagoServicios.mandarDatos(lista)
+                            pagoServicios.cerrarConexion()
+                            continue
+                        else:
+                            continue
+                except ValueError:
+                    print("\n ERROR: No puede ingresar variables que no sean números \n")
                 continue
             case 0:
                 continuar = False
@@ -69,6 +111,7 @@ while(continuar):
     except ValueError:
         print("\n ERROR: No puede ingresar variables que no sean números \n")
 =======
+
 #PLATAFORMA PARA EL CLINETE
 import json
 import os
