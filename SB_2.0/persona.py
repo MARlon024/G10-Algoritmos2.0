@@ -8,5 +8,4 @@ class Persona():
         self.fecha=__fecha
         self.cel=__cel    
         self.cel_ope=__cel_ope
-    def getDNI(self):
-        return self.__dni
+   

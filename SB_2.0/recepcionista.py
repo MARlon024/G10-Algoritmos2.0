@@ -131,10 +131,9 @@ class Recepcionista(Persona):
                     if(opc==1):
                         transacciones.transacciones(self.dni)
                     elif opc==2:
-                        try:
-                            Generar_tarjeta("4509xxxxxxxxxxxx",self.dni)
-                        except Exception:
-                            print("Tarjeta ya creada")
+                        
+                        Generar_tarjeta("4509xxxxxxxxxxxx",self.dni)
+                        
                     elif opc==3:
                         print("Salir")
                 else:

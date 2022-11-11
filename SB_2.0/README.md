@@ -10,6 +10,7 @@
 # Python 3.10.7
 # Base Datos : "DB Browser for SQLite Version 3.12.2"
 # Modulo Tkinter version 8.5
+# Instalar pip install cryptography
 # Pasos:
 # El usuario debe registrarse para hacer uso de las demás funcionalidades
 # El usuario una vez registrado,podrá ingresar a su cuenta:
