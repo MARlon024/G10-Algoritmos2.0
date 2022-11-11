@@ -112,7 +112,6 @@ class Recepcionista(Persona):
         key=""
         
         try:
-            
     
             cursor.execute(f"SELECT * FROM CLIENTES WHERE DNI = {self.dni}")
             user = cursor.fetchall()
@@ -132,7 +131,10 @@ class Recepcionista(Persona):
                     if(opc==1):
                         transacciones.transacciones(self.dni)
                     elif opc==2:
-                        Generar_tarjeta("4509xxxxxxxxxxxx",self.dni)
+                        try:
+                            Generar_tarjeta("4509xxxxxxxxxxxx",self.dni)
+                        except Exception:
+                            print("Tarjeta ya creada")
                     elif opc==3:
                         print("Salir")
                 else:
