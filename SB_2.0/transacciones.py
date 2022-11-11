@@ -1,4 +1,4 @@
-import Transaccion
+import transaccion
 import funciones
 def transacciones(dni):
     continuar=True
@@ -7,7 +7,7 @@ def transacciones(dni):
             opc = funciones.menuPrincipal()
             match(opc):
                 case 1:
-                    deposito = Transaccion.Deposito()
+                    deposito = transaccion.Deposito()
                     try:
                         monto = float(input("Ingrese el monto a depositar \n"))
                          # REEMPLAZAR
@@ -27,7 +27,7 @@ def transacciones(dni):
                         print("\n ERROR: No puede ingresar variables que no sean números \n")
                     continue
                 case 2:
-                    transferencia = Transaccion.Transferencia()
+                    transferencia = transaccion.Transferencia()
                     cuenta = funciones.ingresoCuenta(dni) #REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
                     if(transferencia.existeCuenta(cuenta)):
                         try:
@@ -51,7 +51,7 @@ def transacciones(dni):
                     else:
                         continue
                 case 3:
-                    retiro = Transaccion.Retiro()
+                    retiro = transaccion.Retiro()
                     try:
                         monto = float(input("Ingrese el monto a retirar \n"))
                         if(retiro.montoValido(monto, dni)): # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
@@ -73,7 +73,7 @@ def transacciones(dni):
                         print("\n ERROR: No puede ingresar variables que no sean números \n")
                     continue
                 case 4:
-                    pagoServicios = Transaccion.pagoServicios(dni) #REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE!!!
+                    pagoServicios = transaccion.pagoServicios(dni) #REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE!!!
                     deudas = pagoServicios.devolverDeudas()
                     funciones.mostrarDeudas(deudas)
                     try:

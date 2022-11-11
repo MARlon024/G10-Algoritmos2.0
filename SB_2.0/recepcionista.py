@@ -3,7 +3,7 @@ import sqlite3
 from tkinter import EXCEPTION
 import uuid
 import transacciones
-from TarjetaCredito import *
+from tarjetaCredito import *
 from cryptography.fernet import Fernet
 from persona import *
 
