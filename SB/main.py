@@ -7,7 +7,8 @@ def Menu():
     if(opc==1):
         recep1.registrar()
     elif opc==2:
-        recep1.iniciar_sesion()
+       recep1.iniciar_sesion()
     else:
         print("Intente de nuevo")
 Menu()
+#AGREGAR NCUENTA FALTANTE

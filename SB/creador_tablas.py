@@ -62,8 +62,14 @@ cn.commit()
 cn.close()'''
 
 
+
+
 cn = sqlite3.Connection("Usuarios")
 cursor = cn.cursor()
-cursor.execute(f"INSERT INTO SERVICIOS VALUES ('12345615','LUZ DEL SUR','12345671',200,'2023-01-12')")
+cursor.execute(f"CREATE TABLE CUENTA(DNI VARCHAR(10),MONTO FLOAT)")
 cn.commit()
+
+
+cn.close()
+
 

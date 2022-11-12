@@ -1,32 +1,39 @@
 import random
 import datetime
+import sqlite3
+# cn = sqlite3.Connection("Usuarios")
+# cursor = cn.cursor()
+# cursor.execute('''
+#     CREATE TABLE TARJETA(
+# 	DNI VARCHAR(10),
+#     NTARJETA VARCHAR(20),
+# 	CSATARJETA VARCHAR(20),
+# 	CVV VARCHAR(4),
+# 	FV VARCHAR(8))
+#  ''')#Podemos poner "UNIQUE" al final de nombre
 
 class Generar_tarjeta():
-	def __init__(self, BIN):
+	def __init__(self, BIN,DNI):
 		self.BIN = BIN.replace(" ","")
-
-		#Generación de tarjeta
-		print("Datos de la tarjeta creada")
-		self.lista_tarjetas = []
-		self.dic_tarjetas = {}
-		tarj_creada = self.crear_tarjeta()
-		self.lista_tarjetas.append(tarj_creada["datos_completos"])
+		self.DNI=DNI
+		cn=sqlite3.Connection("Usuarios")
+		cursor=cn.cursor()
+		ele_tarjeta=[]
 		#Impresión de datos
-		for n in self.lista_tarjetas:
-			print("Numero de tarjeta | CVV | fecha de vencimiento")
-			print(n)
-
-	def crear_tarjeta(self):
-		tarjeta = {}
-		tarjeta["numero_tarjeta"] = self.crear_numero(self.BIN)
-		tarjeta["codigo_seg"] 	  = self.generar_codigo_seguridad()
-		tarjeta["vencimiento"]	  = self.generar_fecha_venc()
-		self.string = ""
-		self.string += tarjeta["numero_tarjeta"]
-		self.string += "  | " + tarjeta["codigo_seg"]
-		self.string += " | " + tarjeta["vencimiento"]["fecha_acortada"]
-		tarjeta["datos_completos"] = self.string
-		return tarjeta
+		ele=[self.DNI,self.crear_numero(self.BIN),self.generar_codigo_cajero(),
+				self.generar_codigo_ccv(),self.generar_fecha_venc()]
+		ele_tarjeta.append(ele)
+		for e in ele_tarjeta:
+			tj=e[1]
+			ccv=e[3]
+			fv=e[4]
+		print("Su tarjeta ha sido creada:")
+		print("Número de tarjeta: ",tj)
+		print("CCV: ",ccv)
+		print("Fecha de Vencimiento: ",fv)
+		cursor.execute("INSERT INTO TARJETA VALUES (?,?,?,?,?)", ele)
+		print("Succeed")
+		cn.commit()
 		
 	def gen_aleatorio(self, BIN):	
 		numero = ""
@@ -70,7 +77,7 @@ class Generar_tarjeta():
 
 		fecha["fecha_completa"] = fecha["mes"] + "/" + fecha["anio"]       #12/2027
 		fecha["fecha_acortada"] = fecha["mes"] + "/" + fecha["anio"][2:]   #12/27
-		return fecha
+		return fecha["fecha_acortada"]
 	
 	def llenado(self,numero):
 		numero_final = numero
@@ -78,13 +85,9 @@ class Generar_tarjeta():
 			numero_final+= "x"
 		return numero_final
 
-	def generar_codigo_seguridad(self):
-		return str(random.randint(100,999))
+	def generar_codigo_ccv(self):
+		return str(random.randint(100,998))
+
+	def generar_codigo_cajero(self):
+		return str(random.randint(1000,9998))
 	
-
-bin_muestra = "4509xxxxxxxxxxxx"  #BIN Visa
-num = Generar_tarjeta(bin_muestra)
-
-with open("tarjetas_creadas.txt", "a") as contenido:
-	contenido.write(str(num.lista_tarjetas)+"\n")
-	contenido.close()

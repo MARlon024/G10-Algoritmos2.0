@@ -1,13 +1,13 @@
 import sqlite3
 
-class Transaccion:
+class Transaccion():
 
     def __init__(self):
-        self.conexionCuentas = sqlite3.Connection("Cuentas")
+        self.conexionCuentas = sqlite3.Connection("Usuarios")
 
     def montoValido(self, monto, cuenta):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT SALDO FROM CUENTA WHERE NUMERO_CUENTA={cuenta}")
+        cursor.execute(f"SELECT SALDO FROM CUENTA WHERE DNI={cuenta}")
         self.saldo = cursor.fetchall()[0][0]
         if(self.saldo>=monto):
             valido = True
@@ -18,7 +18,7 @@ class Transaccion:
 
     def existeCuenta(self, cuenta):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT * FROM CUENTA WHERE NUMERO_CUENTA={cuenta}")
+        cursor.execute(f"SELECT * FROM CUENTA WHERE DNI={cuenta}")
         self.confirmacion = cursor.fetchall()
         if(self.confirmacion==[]):
             print("No se ha encontrado la cuenta.")
@@ -29,30 +29,23 @@ class Transaccion:
 
     def obtenerSaldo(self, cuenta):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT SALDO FROM CUENTA WHERE NUMERO_CUENTA={cuenta}")
+        cursor.execute(f"SELECT SALDO FROM CUENTA WHERE DNI={cuenta}")
         saldo = cursor.fetchall()[0][0]
         return saldo
 
     def existeID(self, ID):
         pass
-
     def operacion(self):
         pass
-
     def mandarDatos(self, lista):
         pass
-
     def cerrarConexion(self):
         self.conexionCuentas.close()
-
-
-
-
-
+        
 class Deposito(Transaccion):
     def operacion(self, monto, cuenta):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO+{monto} WHERE NUMERO_CUENTA={cuenta}")
+        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO+{monto} WHERE DNI={cuenta}")
         self.conexionCuentas.commit()
 
     def mandarDatos(self, lista):
@@ -64,9 +57,9 @@ class Transferencia(Transaccion):
 
     def operacion(self, cuentaInicial, cuentaDestino, monto):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO+{monto} WHERE NUMERO_CUENTA={cuentaDestino}")
+        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO+{monto} WHERE DNI={cuentaDestino}")
         self.conexionCuentas.commit()
-        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO-{monto} WHERE NUMERO_CUENTA={cuentaInicial}")
+        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO-{monto} WHERE DNI={cuentaInicial}")
         self.conexionCuentas.commit()
 
 
@@ -89,7 +82,7 @@ class Transferencia(Transaccion):
 class Retiro(Transaccion):
     def operacion(self, cuenta, monto):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO-{monto} WHERE NUMERO_CUENTA={cuenta}")
+        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO-{monto} WHERE DNI={cuenta}")
         self.conexionCuentas.commit()
 
     def mandarDatos(self, lista):
@@ -114,7 +107,7 @@ class pagoServicios(Transaccion):
         self.cuenta = cuenta
     def operacion(self, cuenta, monto, codigoDeuda):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO-{monto} WHERE NUMERO_CUENTA={cuenta}")
+        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO-{monto} WHERE DNI={cuenta}")
         self.conexionCuentas.commit()
         cursor.execute(f"DELETE FROM SERVICIOS WHERE CODIGO_DEUDA = {codigoDeuda}")
         self.conexionCuentas.commit()
