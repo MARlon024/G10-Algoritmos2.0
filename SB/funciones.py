@@ -7,7 +7,14 @@ def menuPrincipal():
     opc = int(input("\n"))
     return opc
 
-
+def comprobarIngreso(variable, digitos):
+    while (len(variable) != digitos or variable.isnumeric() == False):
+        variable = input("Introduzca de nuevo el dato solicitado: \n")
+        if (len(variable) != digitos):
+            print(f"Debe contener {digitos} dígitos... \n")
+        if (variable.isnumeric() == False):
+            print("Debe ingresar solo números... \n")
+    return variable
 def ingresoCuenta(cuentaInicial):
     cuentaDestino = cuentaInicial
     while (len(cuentaDestino) != 14 or cuentaDestino.isnumeric() == False or cuentaDestino == cuentaInicial):

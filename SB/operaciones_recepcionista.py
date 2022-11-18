@@ -37,7 +37,7 @@ class Operaciones_recepcionista():
         boi = False
         print("-------REGISTRO-------")
         id_cliente = str(uuid.uuid1())  # GENERANDO CODIGO UUID
-        dni = input("DNI: ")
+        dni=""
         while (len(dni) != 8 or dni.isnumeric() == False or boi == False):
             dni = input("DNI: ")
             dni = dni.strip()
@@ -99,6 +99,7 @@ class Operaciones_recepcionista():
 
     def __generar_tarjeta(self):
         dni = input("DNI: ")
+        dni = funciones.comprobarIngreso(dni, 8)
         RC = Tarjeta("4509xxxxxxxxxxxx", dni)
         return RC.generar_tarjeta()
 
