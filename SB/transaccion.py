@@ -3,11 +3,11 @@ import sqlite3
 class Transaccion():
 
     def __init__(self):
-        self.conexionCuentas = sqlite3.Connection("Usuarios")
+        self.conexionCuentas = sqlite3.Connection("DataBase/Bank.db")
 
     def montoValido(self, monto, cuenta):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT SALDO FROM CUENTA WHERE DNI={cuenta}")
+        cursor.execute(f"SELECT saldo FROM cuentas_bancarias WHERE num_cuenta={cuenta}")
         self.saldo = cursor.fetchall()[0][0]
         if(self.saldo>=monto):
             valido = True
@@ -18,7 +18,7 @@ class Transaccion():
 
     def existeCuenta(self, cuenta):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT * FROM CUENTA WHERE DNI={cuenta}")
+        cursor.execute(f"SELECT * FROM cuentas_bancarias WHERE num_cuenta={cuenta}")
         self.confirmacion = cursor.fetchall()
         if(self.confirmacion==[]):
             print("No se ha encontrado la cuenta.")
@@ -29,7 +29,7 @@ class Transaccion():
 
     def obtenerSaldo(self, cuenta):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT SALDO FROM CUENTA WHERE DNI={cuenta}")
+        cursor.execute(f"SELECT saldo FROM cuentas_bancarias WHERE num_cuenta={cuenta}")
         saldo = cursor.fetchall()[0][0]
         return saldo
 
@@ -45,32 +45,32 @@ class Transaccion():
 class Deposito(Transaccion):
     def operacion(self, monto, cuenta):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO+{monto} WHERE DNI={cuenta}")
+        cursor.execute(f"UPDATE cuentas_bancarias SET saldo=saldo+'{monto}' WHERE num_cuenta={cuenta}")
         self.conexionCuentas.commit()
 
     def mandarDatos(self, lista):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute("INSERT INTO DEPOSITO VALUES(?,?,?,?,?)", lista)
+        cursor.execute("INSERT INTO depositos VALUES(?,?,?,?,?)", lista)
         self.conexionCuentas.commit()
 
 class Transferencia(Transaccion):
 
     def operacion(self, cuentaInicial, cuentaDestino, monto):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO+{monto} WHERE DNI={cuentaDestino}")
+        cursor.execute(f"UPDATE cuentas_bancarias SET saldo=saldo+'{monto}' WHERE num_cuenta={cuentaDestino}")
         self.conexionCuentas.commit()
-        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO-{monto} WHERE DNI={cuentaInicial}")
+        cursor.execute(f"UPDATE cuentas_bancarias SET saldo=saldo-'{monto}' WHERE num_cuenta={cuentaInicial}")
         self.conexionCuentas.commit()
 
 
     def mandarDatos(self, lista):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute("INSERT INTO TRANSFERENCIAS VALUES(?,?,?,?,?,?)", lista)
+        cursor.execute("INSERT INTO transferencias VALUES(?,?,?,?,?,?)", lista)
         self.conexionCuentas.commit()
 
     def existeID(self, ID):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT * FROM TRANSFERENCIAS WHERE ID_OPERACION={ID}")
+        cursor.execute(f"SELECT * FROM transferencias WHERE id_operacion={ID}")
         self.comprobacion = cursor.fetchall()
         if(self.comprobacion == []):
             existe = False
@@ -82,17 +82,17 @@ class Transferencia(Transaccion):
 class Retiro(Transaccion):
     def operacion(self, cuenta, monto):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO-{monto} WHERE DNI={cuenta}")
+        cursor.execute(f"UPDATE cuentas_bancarias SET saldo=saldo-'{monto}' WHERE num_cuenta={cuenta}")
         self.conexionCuentas.commit()
 
     def mandarDatos(self, lista):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute("INSERT INTO RETIROS VALUES(?,?,?,?,?)",lista)
+        cursor.execute("INSERT INTO retiros VALUES(?,?,?,?,?)",lista)
         self.conexionCuentas.commit()
 
     def existeID(self, ID):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT * FROM RETIROS WHERE ID_OPERACION={ID}")
+        cursor.execute(f"SELECT * FROM retiros WHERE id_operacion={ID}")
         self.comprobacion = cursor.fetchall()
         if(self.comprobacion == []):
             existe = False
@@ -107,31 +107,31 @@ class pagoServicios(Transaccion):
         self.cuenta = cuenta
     def operacion(self, cuenta, monto, codigoDeuda):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"UPDATE CUENTA SET SALDO=SALDO-{monto} WHERE DNI={cuenta}")
+        cursor.execute(f"UPDATE cuentas_bancarias SET saldo=saldo-'{monto}' WHERE num_cuenta={cuenta}")
         self.conexionCuentas.commit()
-        cursor.execute(f"DELETE FROM SERVICIOS WHERE CODIGO_DEUDA = {codigoDeuda}")
+        cursor.execute(f"DELETE FROM servicios WHERE cod_deuda = {codigoDeuda}")
         self.conexionCuentas.commit()
 
     def devolverDeudas(self):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT CODIGO_DEUDA, EMPRESA, MONTO, FECHA_VENCIMIENTO FROM SERVICIOS WHERE CUENTA={self.cuenta}")
+        cursor.execute(f"SELECT cod_deuda, nombre, monto, fecha_venc FROM SERVICIOS WHERE num_cuenta={self.cuenta}")
         deudas = cursor.fetchall()
         return deudas
 
     def mandarDatos(self, lista):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute("INSERT INTO PAGOSERV VALUES(?,?,?,?,?,?)", lista)
+        cursor.execute("INSERT INTO pago_servicios VALUES(?,?,?,?,?,?)", lista)
         self.conexionCuentas.commit()
 
     def deudaMonto(self, codigoDeuda):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT MONTO FROM SERVICIOS WHERE CODIGO_DEUDA={codigoDeuda}")
+        cursor.execute(f"SELECT monto FROM servicios WHERE cod_deuda={codigoDeuda}")
         monto = cursor.fetchall()[0][0]
         return monto
 
     def existeID(self, ID):
         cursor = self.conexionCuentas.cursor()
-        cursor.execute(f"SELECT * FROM SERVICIOS WHERE CODIGO_DEUDA={ID}")
+        cursor.execute(f"SELECT * FROM servicios WHERE cod_deuda={ID}")
         self.comprobacion = cursor.fetchall()
         if (self.comprobacion == []):
             existe = False

@@ -1,11 +1,10 @@
 class Persona():
-    def __init__(self ,__nom, __dni,__ape_pa,__ape_ma,__correo,__fecha,__cel=None,__cel_ope=None):
-        self.nom = __nom
-        self.dni = __dni
-        self.ape_pa=__ape_pa
-        self.ape_ma=__ape_ma
-        self.correo=__correo
-        self.fecha=__fecha
-        self.cel=__cel    
-        self.cel_ope=__cel_ope
-   
+    def __init__(self, nom, dni, ape_pa, ape_ma, correo, fecha, cel, cel_ope):
+        self.nom = nom
+        self.dni = dni
+        self.ape_pa = ape_pa
+        self.ape_ma = ape_ma
+        self.correo = correo
+        self.fecha = fecha
+        self.cel = cel
+        self.cel_ope = cel_ope
