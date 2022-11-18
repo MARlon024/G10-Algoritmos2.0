@@ -2,6 +2,7 @@ import datetime
 from random import randint
 
 
+# no es S de SOLID: 
 def menuPrincipal():
     print("\t \t  Bienvenido al panel de transacciones. Ingrese la opción a continuar: \n 1. Depósito \n 2. Transferencia \n 3. Retiro \n 4. Pago de servicios \n 0. Salir")
     opc = int(input("\n"))
@@ -31,6 +32,9 @@ def ingresoCuenta(cuentaInicial):
 
 def ingresoDeuda():
     codigoDeuda = ""
+    valid = correrValidacionesDeuda(deuda)
+    return false if !valid
+
     while (len(codigoDeuda) != 8 or codigoDeuda.isnumeric() == False):
         codigoDeuda = input("Introduzca el código de deuda a pagar: \n")
         if (len(codigoDeuda) != 8):
@@ -38,6 +42,34 @@ def ingresoDeuda():
         if (codigoDeuda.isnumeric() == False):
             print("Debe ingresar solo números... \n")
     return codigoDeuda
+
+
+class Deuda:
+    def __init__():
+        __codigo_deuda = input("introduzca codigo")
+        __valor = input("valor deuda")
+        __dni = input("dni")
+        if self.__validaciones() != true:
+            print("Error al validar!")
+            raise "some_error"
+
+    def mostrar_deuda(self):
+        return self.__codigo_deuda
+
+    def __validaciones():
+        return false if len(__codido_deuda)!= 8
+        return false if __codigo_deuda.isnumeric() == False
+        return true
+
+
+
+def main():
+    deuda = Deuda()
+    dbDeuda = DBDeuda()
+    mostrar_deuda()
+    dbDeuda.save_deuda(deuda)
+    
+    buscar_deuda(deuda)
 
 
 def obtenerTiempo():

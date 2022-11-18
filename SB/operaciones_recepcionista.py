@@ -161,7 +161,7 @@ class Operaciones_recepcionista():
                     case 2:
                         cuenta_origen = input("Cuenta origen: ")
                         transferencia = transaccion.Transferencia()
-                        cuenta_destino = funciones.ingresoCuenta(cuenta_origen) #REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
+                        cuentaDestino = funciones.ingresoCuenta(cuenta_origen) #REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
                         if(transferencia.existeCuenta(cuenta_destino)):
                             try:
                                 monto = float(input("Ingrese el monto a depositar: \n"))
@@ -230,7 +230,7 @@ class Operaciones_recepcionista():
                                         while(pagoServicios.existeID(ID)):
                                             ID = "3" + funciones.generarNumero(9)
                                         funciones.mostrarServicio(ID, fecha, hora)
-                                        lista = funciones.exportarServicio(ID, codigoDeuda, cuenta_destino, monto, fecha, hora) # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
+                                        lista = funciones.exportar_servicio(ID, codigoDeuda, cuenta_destino, monto, fecha, hora) # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
                                         pagoServicios.mandarDatos(lista)
                                         pagoServicios.cerrarConexion()
                                         continue
