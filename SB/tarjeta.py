@@ -29,11 +29,11 @@ class Tarjeta():
         # print(very)
         # Impresión de datos
         status = "Activo"
+        activate = "Activo"
         ele = [id_tarjeta, self.dni, self.crear_numero(self.bin), self.generar_fecha_venc(),
                self.generar_codigo_ccv(), self.generar_clave(), status]
         ele_tarjeta.append(ele)
         sql1 = f"INSERT INTO tarjetas VALUES (?,?,?,?,?,?,?)"
-        activate = "Activo"
         sql2 = f"UPDATE cuentas_bancarias SET tarjeta='{activate}' WHERE dni={self.dni}"
         cursor.execute(sql1, ele)
         cursor.execute(sql2)
