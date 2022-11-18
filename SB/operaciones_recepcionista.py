@@ -211,31 +211,34 @@ class Operaciones_recepcionista():
                         cuenta_destino = input("Cuenta destino: ")
                         pagoServicios = transaccion.pagoServicios(cuenta_destino) #REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE!!!
                         deudas = pagoServicios.devolverDeudas()
-                        funciones.mostrarDeudas(deudas)
-                        try:
-                            codigoDeuda = funciones.ingresoDeuda()
-                            if (not pagoServicios.existeID(codigoDeuda)):
-                                print("\n Este codigo no existe...\n \n")
-                                continue
-                            else:
-                                monto = pagoServicios.deudaMonto(codigoDeuda)
-                                if(pagoServicios.montoValido(monto,cuenta_destino)): # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
-                                    pagoServicios.operacion(dni,monto, codigoDeuda) # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
-                                    print("¡Servicio cancelado! \n")
-                                    fecha, hora = funciones.obtenerTiempo()
-                                    ID = "3" + funciones.generarNumero(9)
-                                    while(pagoServicios.existeID(ID)):
-                                        ID = "3" + funciones.generarNumero(9)
-                                    funciones.mostrarServicio(ID, fecha, hora)
-                                    lista = funciones.exportarServicio(ID, codigoDeuda, cuenta_destino, monto, fecha, hora) # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
-                                    pagoServicios.mandarDatos(lista)
-                                    pagoServicios.cerrarConexion()
+                        if(deudas==[]):
+                            print("¡Felicitaciones! Usted está al día en todos sus pagos... \n \n")
+                        else:
+                            funciones.mostrarDeudas(deudas)
+                            try:
+                                codigoDeuda = funciones.ingresoDeuda()
+                                if (not pagoServicios.existeID(codigoDeuda)):
+                                    print("\n Este codigo no existe...\n \n")
                                     continue
                                 else:
-                                    continue
-                        except ValueError:
-                            print("\n ERROR: No puede ingresar variables que no sean números \n")
-                        continue
+                                    monto = pagoServicios.deudaMonto(codigoDeuda)
+                                    if(pagoServicios.montoValido(monto,cuenta_destino)):
+                                        pagoServicios.operacion(dni,monto, codigoDeuda)
+                                        print("¡Servicio cancelado! \n")
+                                        fecha, hora = funciones.obtenerTiempo()
+                                        ID = "3" + funciones.generarNumero(9)
+                                        while(pagoServicios.existeID(ID)):
+                                            ID = "3" + funciones.generarNumero(9)
+                                        funciones.mostrarServicio(ID, fecha, hora)
+                                        lista = funciones.exportarServicio(ID, codigoDeuda, cuenta_destino, monto, fecha, hora) # REEMPLAZAR POR CUENTA INGRESADA PREVIAMENTE !!!
+                                        pagoServicios.mandarDatos(lista)
+                                        pagoServicios.cerrarConexion()
+                                        continue
+                                    else:
+                                        continue
+                            except ValueError:
+                                print("\n ERROR: No puede ingresar variables que no sean números \n")
+                            continue
                     case 0:
                         continuar = False
                         continue
