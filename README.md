@@ -6,6 +6,8 @@
 # Durand Caracuzma Marlon
 # Canecillas Contreras, Juan
 
+# Repositorio: https://github.com/MARlon024/G10-Algoritmos2.0
+
 # Requerimientos:
 
 # PARA WINDOWS:
