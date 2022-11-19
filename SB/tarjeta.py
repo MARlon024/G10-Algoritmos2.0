@@ -10,7 +10,7 @@ class Tarjeta():
     def __init__(self, bin, dni):
         self.bin = bin
         self.dni = dni
-        self.path=r'C:\Users\marli\OneDrive\Escritorio\Tra_Pro\G10-Algoritmos2.0\SB\DataBase\Bank.db'
+        self.path=r'SB\DataBase\Bank.db'
     def generar_tarjeta(self):
         generar = self.__generar_tarjeta()
         return generar

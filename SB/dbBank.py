@@ -1,6 +1,6 @@
 import sqlite3
 
-path=r'C:\Users\marli\OneDrive\Escritorio\Tra_Pro\G10-Algoritmos2.0\SB\DataBase\Bank.db'
+path=r'SB\DataBase\Bank.db'
     
 
 def createDataBase():

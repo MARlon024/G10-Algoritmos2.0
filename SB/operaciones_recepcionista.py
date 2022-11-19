@@ -10,7 +10,7 @@ class Operaciones_recepcionista():
     def __init__(self, user_recep, psw_recep):
         self.__user_recep = user_recep
         self.__psw_recep = psw_recep
-        self.path=r'C:\Users\marli\OneDrive\Escritorio\Tra_Pro\G10-Algoritmos2.0\SB\DataBase\Bank.db'
+        self.path=r'SB\DataBase\Bank.db'
     def iniciar_sesion(self):
         conn = sqlite3.connect(self.path)
         cursor = conn.cursor()

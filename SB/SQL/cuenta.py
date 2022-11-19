@@ -3,7 +3,7 @@ import sqlite3
 class Cuenta:
     def __init__(self, cuenta):
         self.__cuenta = cuenta
-        self.__path=r'C:\Users\marli\OneDrive\Escritorio\Tra_Pro\G10-Algoritmos2.0\SB\DataBase\Bank.db'
+        self.__path=r'SB\DataBase\Bank.db'
         self.__conexion = sqlite3.Connection(self.__path)
         self.__cursor = self.__conexion.cursor()
 
