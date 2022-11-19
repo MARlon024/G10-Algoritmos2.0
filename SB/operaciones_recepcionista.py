@@ -1,30 +1,29 @@
-from SB.operaciones.deposito import deposito
-from SB.operaciones.retiro import retiro
-from SB.operaciones.transferencia import transferencia
-from SB.operaciones.pago_servicios import pagos_servicios
+from operaciones.deposito import deposito
+from operaciones.retiro import retiro
+from operaciones.transferencia import transferencia
+from operaciones.pago_servicios import pagos_servicios
 import funciones
 from tarjeta import *
-from SB.SQL import transaccion
 
 
 class Operaciones_recepcionista():
     def __init__(self, user_recep, psw_recep):
         self.__user_recep = user_recep
         self.__psw_recep = psw_recep
-
+        self.path=r'C:\Users\marli\OneDrive\Escritorio\Tra_Pro\G10-Algoritmos2.0\SB\DataBase\Bank.db'
     def iniciar_sesion(self):
-        conn = sqlite3.connect("DataBase/Bank.db")
+        conn = sqlite3.connect(self.path)
         cursor = conn.cursor()
-        instruccion = f"SELECT * FROM recepcionistas WHERE usuario='{self.__user_recep}' AND contraseña='{self.__psw_recep}';"
-        cursor.execute(instruccion)
-        if not cursor.fetchone():
-            return "Error al iniciar sesion"
+        cursor.execute(f"SELECT * FROM recepcionistas WHERE usuario='{self.__user_recep}' AND contraseña='{self.__psw_recep}'")  
+        product = cursor.fetchall()
+        
+        if cursor.fetchone() == False:
+            return False
         else:
-            conex_seg = True
-            return conex_seg
-
+            return True
+        
     def registrar_cliente(self):
-        conn = sqlite3.Connection("DataBase/Bank.db")
+        conn = sqlite3.Connection(self.path)
         cursor = conn.cursor()
         veri = ""
         user_recep = []
@@ -96,7 +95,7 @@ class Operaciones_recepcionista():
     def bloquear_tarjeta(self):
         dni = input("Dni: ")
         clave = getpass.getpass()
-        conn = sqlite3.Connection("DataBase/Bank.db")
+        conn = sqlite3.Connection(self.path)
         cursor = conn.cursor()
         status = "Bloqueada"
         sql1 = f"UPDATE cuentas_bancarias SET tarjeta='{status}' WHERE dni={dni}"

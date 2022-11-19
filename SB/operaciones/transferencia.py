@@ -1,6 +1,6 @@
-from SB import funciones
-from SB.SQL.transaccion import Transferencia
-from SB.SQL.cuenta import Cuenta
+import funciones
+from SQL.transaccion import Transferencia
+from SQL.cuenta import Cuenta
 
 def transferencia():
     cuenta_origen = input("Ingrese la cuenta origen: \n")

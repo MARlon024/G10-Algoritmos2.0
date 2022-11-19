@@ -10,13 +10,13 @@ class Tarjeta():
     def __init__(self, bin, dni):
         self.bin = bin
         self.dni = dni
-
+        self.path=r'C:\Users\marli\OneDrive\Escritorio\Tra_Pro\G10-Algoritmos2.0\SB\DataBase\Bank.db'
     def generar_tarjeta(self):
         generar = self.__generar_tarjeta()
         return generar
 
     def __generar_tarjeta(self):
-        cn = sqlite3.Connection("DataBase/Bank.db")
+        cn = sqlite3.Connection(self.path)
         cursor = cn.cursor()
         ele_tarjeta = []
         id_tarjeta = str(uuid.uuid1())

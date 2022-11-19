@@ -1,6 +1,6 @@
-from SB import funciones
-from SB.SQL.transaccion import Retiro
-from SB.SQL.cuenta import Cuenta
+import funciones
+from SQL.transaccion import Retiro
+from SQL.cuenta import Cuenta
 
 def retiro():
     num_cuenta = input("Ingrese la cuenta a retirar: \n")

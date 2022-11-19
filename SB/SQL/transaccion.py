@@ -3,7 +3,8 @@ import sqlite3
 class Transaccion:
 
     def __init__(self, cuenta, saldo):
-        self.conexionCuentas = sqlite3.Connection("DataBase/Bank.db")
+        self.__path=r'C:\Users\marli\OneDrive\Escritorio\Tra_Pro\G10-Algoritmos2.0\SB\DataBase\Bank.db'
+        self.conexionCuentas = sqlite3.Connection(self.__path)
         self.__cuenta = cuenta
         self.__saldo = saldo
     def monto_valido(self):

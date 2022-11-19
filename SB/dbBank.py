@@ -1,16 +1,16 @@
 import sqlite3
 
-file_database = "DataBase/Bank.db"
-
+path=r'C:\Users\marli\OneDrive\Escritorio\Tra_Pro\G10-Algoritmos2.0\SB\DataBase\Bank.db'
+    
 
 def createDataBase():
-    conn = sqlite3.connect(file_database)
+    conn = sqlite3.connect(path)
     conn.commit()
     conn.close()
 
 
 def createTableRecepcionista():
-    conn = sqlite3.connect(file_database)
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
     instruccion = f"""
         CREATE TABLE recepcionistas(
@@ -33,7 +33,7 @@ def createTableRecepcionista():
 
 
 def insertRowRecepcionista(dni, nombre, ape_Pat, ape_Mat, correo, fech, cel, oper, user, psw, status):
-    conn = sqlite3.connect(file_database)
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
     instruccion = f"INSERT INTO recepcionistas VALUES ('{dni}','{nombre}','{ape_Pat}','{ape_Mat}','{correo}','{fech}','{cel}','{oper}','{user}','{psw}','{status}')"
     cursor.execute(instruccion)
@@ -42,7 +42,7 @@ def insertRowRecepcionista(dni, nombre, ape_Pat, ape_Mat, correo, fech, cel, ope
 
 
 def createTableCliente():
-    conn = sqlite3.connect("DataBase/Bank.db")
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
     instruccion = f"""CREATE TABLE clientes(
         id_cliente BINARY(20),
@@ -63,7 +63,7 @@ def createTableCliente():
 
 
 def createTableCuentasBancarias():
-    conn = sqlite3.connect("DataBase/Bank.db")
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
     instruccion = f"""CREATE TABLE cuentas_bancarias(
         id_cuenta BINARY(20),
@@ -79,7 +79,7 @@ def createTableCuentasBancarias():
 
 
 def createTableTarjetas():
-    conn = sqlite3.connect(file_database)
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
     instruccion = f"""
         CREATE TABLE tarjetas(
@@ -97,7 +97,7 @@ def createTableTarjetas():
 
 
 def createTableDepositos():
-    conn = sqlite3.connect(file_database)
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
     instruccion = f"""
         CREATE TABLE depositos(
@@ -114,7 +114,7 @@ def createTableDepositos():
 
 
 def createTableRetiros():
-    conn = sqlite3.connect(file_database)
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
     instruccion = f"""
         CREATE TABLE retiros(
@@ -131,7 +131,7 @@ def createTableRetiros():
 
 
 def createTablePagoServicios():
-    conn = sqlite3.connect(file_database)
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
     instruccion = f"""
         CREATE TABLE pago_servicios(
@@ -149,7 +149,7 @@ def createTablePagoServicios():
 
 
 def createTableServicios():
-    conn = sqlite3.connect(file_database)
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
     instruccion = f"""
         CREATE TABLE servicios(
@@ -167,7 +167,7 @@ def createTableServicios():
 
 
 def createTableTransferencias():
-    conn = sqlite3.connect(file_database)
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
     instruccion = f"""
         CREATE TABLE transferencias(

@@ -1,6 +1,6 @@
-from SB import funciones
-from SB.SQL.transaccion import Deposito
-from SB.SQL.cuenta import Cuenta
+import funciones
+from SQL.transaccion import Deposito
+from SQL.cuenta import Cuenta
 
 def deposito():
     num_cuenta = input("Ingrese la cuenta a depositar \n")
