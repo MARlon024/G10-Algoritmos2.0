@@ -31,8 +31,8 @@ class Recepcionista(Persona):
     def buscar_recepcionista(self):
         self.__user_recep = input("Usuario: ")
         self.__psw_recep = getpass.getpass()
-        RC = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
-        if RC.iniciar_sesion() == True:
+        recepcionista = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
+        if recepcionista.iniciar_sesion() == True:
             menu()
             opc = int(input("Opcion: "))
             if opc == 1:
@@ -51,21 +51,21 @@ class Recepcionista(Persona):
             print("Error, usuario no encontrado")
 
     def registrar_cliente(self):
-        RC = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
-        return RC.registro_cliente()
+        recepcionista = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
+        return recepcionista.registrar_cliente()
 
     def generar_tarjeta_cliente(self):
-        RC = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
-        return RC.generar_tarjeta()
+        recepcionista = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
+        return recepcionista.generar_tarjeta()
 
     def bloquear_tarjeta_cliente(self):
-        RC = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
-        return RC.bloquear_tarjeta()
+        recepcionista = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
+        return recepcionista.bloquear_tarjeta()
 
     def renovar_tarjeta_Cliente(self):
-        RC = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
-        return RC.renovar_tarjeta()
+        recepcionista = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
+        return recepcionista.renovar_tarjeta()
 
     def transacciones(self):
-        RC = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
-        return RC.transacciones()
+        recepcionista = Operaciones_recepcionista(self.__user_recep, self.__psw_recep)
+        return recepcionista.transacciones()
