@@ -21,11 +21,13 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url('admin/', admin.site.urls),
     url(r'^$', views.index, name = "home"),
     url(r'^accounts/', include("accounts.urls")),
     url(r'^profile/', include("profiles.urls")),
     url(r'^admins/', include("admins.urls")),
+    url(r'^tarjeta/', include("tarjeta.urls")),
+    url(r'^transaccions/', include("transaccions.urls")),
 
 ]
 

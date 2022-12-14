@@ -1,17 +1,16 @@
-{% extends 'base_layout.html' %}
+{% extends 'diseño_base.html' %}
 
 {% block bodycontent %}    
     <div class="container text-center">
-        <h1>Welcome to Sistema Bancario </h1>
-        <h4><em>aaaaaaaaaaaaaaaa</em></h4>
+        <br>
+        <h1>Bienvenidx a banquito </h1>
+        <h4><em>donde no hay lugar mas comodo para que tu dinero descanse</em></h4>
     </div>
-
     <br>
-    
     <div class="container">
-        <a href="{% url 'accounts:signup' %}"><button class="btn btn-primary btn-block" id="acc"><i class="fa fa-user"></i> Create new account</button></a>
+        <a href="{% url 'accounts:crear_cuenta' %}"><button class="btn btn-primary btn-block" id="acc"><i class="fa fa-user"></i> Crear cuenta</button></a>
         <br> 
-        <a href="{% url 'accounts:signin' %}"><button class="btn btn-danger btn-block" id="sign_in"><i class="fa fa-sign-in"></i> Sign in</button></a>
+        <a href="{% url 'accounts:iniciar_sesion' %}"><button class="btn btn-danger btn-block" id="sign_in"><i class="fa fa-sign-in"></i> Iniciar sesion</button></a>
     </div>
     
     <br>

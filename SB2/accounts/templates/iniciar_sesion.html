@@ -1,9 +1,37 @@
-{% extends 'base_layout.html' %}
+{% extends 'diseño_base.html' %}
 
-{% block stylecontent %}
+{% block bodycontent%}
+    <h2 class="container text-center">Iniciar sesion</h2>
+    <h6 class="text-center"><em>(Todos los campos son obligatorios)</em></h6>
+    <br>
+
+    <form class="container" action="/accounts/iniciar_sesion/" method="post">
+        {% csrf_token %}
+        <section class="form-control">
+            <h4>Ingrese los datos de inicio de sesión</h4>
+            {{ form }}
+        </section>
+        <br><br>
+
+        <div class="d-grid gap-2">
+            <input type="submit" class="btn btn-danger" value="Iniciar sesión" name="submit"
+            />
+        </div>
+
+        <br> 
+
+         <small class="row">
+            <a href="#" class="col text-left">¿Olvidó la contraseña?</a>
+            <a href="{% url 'accounts:crear_cuenta' %}" class="col text-right">Crear nueva cuenta</a>
+        </small>
+    </form>
+        
 {% endblock %}
 
-
-{% block bodycontent %}
-<h5> Iniciar sesion </h5>
+{% block scriptcontent %}
+    <script>
+        $(".active").removeClass("active");
+        $("#nav-login").addClass("active");
+        $("input").addClass("form-control");
+    </script>
 {% endblock %}

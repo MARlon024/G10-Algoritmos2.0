@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'bootstrap_themes',
     'accounts',
     'profiles',
-    'admins'
+    'admins',
+    'tarjeta',
+    'transaccions',
 ]
 
 MIDDLEWARE = [

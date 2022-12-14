@@ -1,5 +1,53 @@
-{% extends 'base_layout.html' %}
+{% extends 'perfil_diseño_base.html' %}
+
+{% block stylecontent %}
+<style>
+    h1 {
+        position: absolute;
+        bottom: 35rem;
+        left: 0rem;
+        right: 0px;
+    }
+    h4 {
+        position: absolute;
+        bottom: 32rem;
+        left: 0rem;
+        right: 0px;
+    }
+    .card {
+        position: absolute;
+        bottom: 15rem;
+        left: 36rem;
+    }
+  </style>
+{% endblock %}
 
 {% block bodycontent %}
-<h5>Perfil del usuario </h5>
+
+    <h1 class="container text-center">Bienvenidx a banquito, <span id="prof_name">{{ user }}</span></h1>
+    <h4 class="text-center">donde no hay lugar mas comodo para que tu dinero descanse</h4>
+    <br>
+
+    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+        <div class="card-body">
+          <h3 class="text-center card-title">Número de cuenta</h3>
+          <p class="text-center card-text">
+            {{ usuario_actual.numero_cuenta }}</p>
+        </div>
+      </div>
+
+      <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-body">
+          <h3 class="text-center card-title">Dinero disponible en la cuenta</h3>
+          <p class="text-center card-text">
+            {{ usuario_actual.dinero }}</p>
+        </div>
+      </div>
+
+      <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+        <div class="card-body">
+          <h3 class="text-center card-title">Tipo de cuenta</h3>
+          <p class="text-center card-text">Debito</p>
+        </div>
+      </div>
 {% endblock %}
