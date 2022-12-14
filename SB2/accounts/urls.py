@@ -4,7 +4,7 @@ from . import views
 app_name = "accounts"
 
 urlpatterns = [
-    url(r"^register/$", views.crear_cuenta, name = "signup"),
-    url(r"^login/$", views.iniciar_sesion, name = "signin"),
-    url(r"^logout/$", views.cerrar_sesion, name = "logout"),
+    url(r"^crear_cuenta/$", views.crear_cuenta, name = "crear_cuenta"),
+    url(r"^iniciar_sesion/$", views.iniciar_sesion, name = "iniciar_sesion"),
+    url(r"^cerrar_sesion/$", views.cerrar_sesion, name = "cerrar_sesion"),
 ]

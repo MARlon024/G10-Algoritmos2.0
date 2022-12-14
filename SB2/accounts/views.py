@@ -25,6 +25,5 @@ def iniciar_sesion(request):
         return render(request, "iniciar_sesion.html", {"form": form})
 
 def cerrar_sesion(request):
-    # Logout the user if he hits the logout submit button
     logout(request)
     return redirect("accounts:iniciar_sesion")

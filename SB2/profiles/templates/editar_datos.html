@@ -1,5 +1,106 @@
-{% extends 'base_layout.html' %}
+{% extends 'perfil_diseño_base.html' %}
+
+{% block stylecontent %}
+<style>
+    h2 {
+        position: absolute;
+        bottom: 35rem;
+        left: 0rem;
+        right: 0px;
+    }
+    h4 {
+        position: absolute;
+        bottom: 32rem;
+        left: 0rem;
+        right: 0rem;
+    }
+    small{
+        position: absolute;
+        bottom: 15rem;
+        left: 24rem;
+        right: 20rem;
+    }
+    button{
+        position: absolute;
+        bottom: 11rem;
+        left: 45rem;
+
+    }
+
+  </style>
+{% endblock %}
+
 
 {% block bodycontent %}
-<h5>Editar datos </h5>
+    <section id="welcome_post" class="col-9">
+        <h2 class="container text-center">Bienvenidx al módulo de editar datos, <span id="nombre_usuario">{{ user }}</span></h2>
+        <h4 class="container text-center"> Solo se pueden editar los siguientes datos. Para el resto, debera acercarse al banco en persona.</h4>
+        <br>
+        <!-- editar datos generales-->
+        <a href="#basic" class="btn btn-primary btn-block" data-toggle="modal" data-target="#basic">Editar datos</a>
+        <div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-labelledby="basic" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <form action="{ url 'profiles:editar_datos' }" method="post" enctype="multipart/form-data" id="basic-form">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {{ form1 }}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+
+        <br> <br>
+
+        <!-- editar contraseña-->
+        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#password">Editar contraseña</button>
+        <div class="modal fade" id="password" tabindex="-1" role="dialog" aria-labelledby="password" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar contraseña</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        
+                        {% csrf_token %}
+                        {{ form2 }}
+                        Prove you are human
+                        <div class="g-recaptcha" data-sitekey="6Ld_qjQUAAAAADjv2scrqpvXK4OrBZALRJFMANpP"></div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar contraseña</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>    
+        
+    </section>
+{% endblock %}
+
+{% block scriptcontent %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+        $(".current").removeClass("current");
+        $("#details").addClass("current");
+
+        $("input").addClass("form-control");
+        $("input[type=radio]").removeClass("form-control");
+    </script>
 {% endblock %}

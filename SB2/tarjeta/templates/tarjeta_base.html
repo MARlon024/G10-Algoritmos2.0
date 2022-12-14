@@ -1,0 +1,38 @@
+{% extends 'perfil_diseño_base.html' %}
+
+{% block stylecontent %}
+<style>
+    h2 {
+        position: absolute;
+        bottom: 35rem;
+        left: 0rem;
+        right: 0px;
+    }
+    h4 {
+        position: absolute;
+        bottom: 17rem;
+        left: 24rem;
+        right: 20rem;
+    }
+    small{
+        position: absolute;
+        bottom: 15rem;
+        left: 24rem;
+        right: 20rem;
+    }
+    button{
+        position: absolute;
+        bottom: 11rem;
+        left: 45rem;
+
+    }
+  </style>
+{% endblock %}
+
+{% block bodycontent %}
+    <section id="welcome_post" class="col-9">
+        <h2 class="container text-center">Bienvenidx al módulo de tarjeta de débito, <span id="nombre_usuario">{{ user }}</span></h2>
+
+    </section>
+    <br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

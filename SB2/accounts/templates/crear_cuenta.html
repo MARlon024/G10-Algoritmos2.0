@@ -1,9 +1,49 @@
-{% extends 'base_layout.html' %}
+{% extends 'diseño_base.html' %}
 
-{% block stylecontent %}
+{% block bodycontent %}        
+    <h2 class="container text-center">Crear nueva cuenta</h2>
+    <h6 class="text-center"><em>(Todos los campos son obligatorios)</em></h6>
+    <br>
+    
+    <form class="container" action="/accounts/crear_cuenta/" method="post">
+        {% csrf_token %}
+        <section class="form-control">
+            <h4>Introduce los datos básicos</h4>
+            {{ form }}
+        </section>
+        <br><br>
+
+        <section>
+            <input type="checkbox" required> 
+            <small>Al hacer clic en "Crear cuenta" usted acepta nuestro
+                <a href="#">Terminos y condiciones</a>.</small>
+        </section>
+        
+        <br>
+
+        <div class="d-grid gap-2">
+            <input type="submit" class="btn btn-danger" value="Crear cuenta" name="submit"
+            />
+        </div>
+
+    </form>
+
+    <br>
 {% endblock %}
 
+{% block scriptcontent %}
+    <script>
+        $(".active").removeClass("active");
+        $("#nav-create").addClass("active");
+        $(".helptext").html("");
 
-{% block bodycontent %}
-<h5>Crear cuenta </h5>
+        var input_text = $("input[type=text]");
+        input_text.addClass("form-control");
+
+        var input_pass = $("input[type=password]");
+        input_pass.addClass("form-control");
+
+        $("form ul li").addClass("btn btn-danger");
+
+    </script>
 {% endblock %}

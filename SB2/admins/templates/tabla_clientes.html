@@ -1,0 +1,39 @@
+{% extends 'admin_base.html' %}
+
+{% block stylecontent %}
+<style>
+  .table {
+      position: absolute;
+      width: 75%;
+      height: auto;
+  }
+</style>
+{% endblock %}
+
+{% block bodycontent %}
+  <br>
+  <h2 class="container text-center">Vista de clientes registrados</h2>
+  <br>
+  {% if clientes %}
+  {% for cliente in clientes%}
+  <table class="table table-hover">
+      <thead>
+        <tr class="table-success">
+          <th scope="col">Nombres</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">Correo electrónico</th>
+          <th scope="col">Número de celular</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{cliente.nombres}}</td>
+          <td>{{cliente.apellido_paterno}} {{cliente.apellido_materno}}</td>
+          <td>{{cliente.correo}}</td>
+          <td>{{cliente.num_celular}}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
+  {% endif %}
+{% endblock %}

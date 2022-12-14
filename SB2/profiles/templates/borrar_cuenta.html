@@ -1,5 +1,74 @@
-{% extends 'base_layout.html' %}
+{% extends 'perfil_diseño_base.html' %}
+
+{% block stylecontent %}
+<style>
+    h1 {
+        position: absolute;
+        bottom: 35rem;
+        left: 0rem;
+        right: 0px;
+    }
+    h3 {
+        position: absolute;
+        bottom: 31rem;
+        left: 25rem;
+        right: 0px;
+    }
+    .square {
+        position: absolute;
+        bottom: 50rem;
+        left: 25rem;
+    }
+  </style>
+{% endblock %}
 
 {% block bodycontent %}
-<h5>borrar cuenta </h5>
+    <section id="welcome_post" class="col-9">   
+        <h1 class="container text-center">Bienvenidx al módulo de eliminar cuenta, <span id="prof_name">{{ usuario }}</span></h1>
+        <h3 style="font-weight: 300;" >Eliminar la cuenta significa:</h3>
+        <ul type="square">
+            <li>Perdida permanente del dinero de su cuenta (por lo que <a href="{% url 'transaccions:transferencia_dinero' %}">transfiera su dinero</a> a una cuenta diferente primero). </li>
+            <li>Perdida permanente de los datos, la configuración y los detalles de su cuenta.</li>
+        </ul>    
+        
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#delete" >
+            Eliminar cuenta
+        </button>
+
+        <!-- Módulo de confirmación -->
+        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar cuenta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        Introduzca la contraseña para confirmar la eliminación
+                        <input type="password" class="form-control" required>
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-danger">Confirmar</button>
+                    </div>
+                </form>
+                
+            </div>
+            </div>
+        </div>
+        
+        
+    </section>
+{% endblock %}
+
+{% block scriptcontent %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+        $(".current").removeClass("current");
+        $("#delete").addClass("current");
+    </script>
 {% endblock %}

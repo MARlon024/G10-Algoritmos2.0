@@ -11,23 +11,15 @@ class DatosGenerales(models.Model):
     num_celular = models.IntegerField()
     sexo = models.CharField(max_length=10)
     edad = models.IntegerField()
-    domicilio = models.TextField()
+    domicilio = models.CharField(max_length=50)
 
-class Tarjeta(models.Model):
-    #null = True -> permite los casilleros vacíos
-    #on_delete = si se borra una persona, se borra la info de la tarjeta
-    persona = models.ForeignKey(DatosGenerales, null = True, blank = True, on_delete = models.CASCADE)
-    num_tarjeta = models.IntegerField()
-    fecha_vencimiento = models.DateField()
-    ccv = models.IntegerField()
+class Estado(models.Model):
+    numero_cuenta = models.IntegerField()        
+    nombre_usuario = models.CharField(max_length = 10, primary_key=True)
+    dinero = models.IntegerField()
 
 class SesionWeb(models.Model):
     persona = models.OneToOneField(DatosGenerales, null = True, blank = True, on_delete = models.CASCADE)
     web_password = models.CharField(max_length = 6)
 #   contador
 #   boleta
-
-class Transferencias(models.Model):
-    ingresar_usuario = models.CharField(max_length = 150, default = None)
-    ingresar_cuenta_destino = models.IntegerField()
-    ingresar_monto = models.IntegerField()

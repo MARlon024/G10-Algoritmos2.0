@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<html lang = "es">
+    <head>
+        <meta charset="UTF-5">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+       
+        {% block stylecontent %}
+        {% endblock %}
+    
+        {% load bootstrap_themes %}
+        <link rel = "stylesheet" href = "{% static 'bootstrap.min.css' %}">
+        <link href="bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <title>{% block title %} Banco | Inicio {%endblock %}</title>
+    </head>
+
+    <body>
+        {% block headercontent %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url 'profiles:index_user' %}">Banca por internet</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="{%url 'accounts:crear_cuenta' %}" id="nav-create">Crear nueva cuenta</a>
+                    <a class="nav-item nav-link" href="{% url 'accounts:cerrar_sesion' %}" id="nav-login">Cerrar sesion</a>  
+                </div>
+                </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <style>
+            nav {
+              flex-shrink: 0px;
+              width: auto;
+              height: 4rem;
+            }
+          </style>
+        {% endblock %}
+
+        {% block navbar %}
+          <div class="b-example-divider b-example-vr"></div>
+          <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
+            <ul class="list-unstyled ps-0">
+              <li class="mb-1">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Transacciones-collapse" aria-expanded="false">
+                    Transacciones
+                  </button>
+                <div class="collapse show" id="Transacciones-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li><a href="{% url 'transaccions:deposito' %}" class="link-dark d-inline-flex text-decoration-none rounded">Depósitos</a></li>
+                      <li><a href="{% url 'transaccions:pago_servicios' %}" class="link-dark d-inline-flex text-decoration-none rounded">Pago de servicios</a></li>
+                      <li><a href="{% url 'transaccions:retiro' %}" class="link-dark d-inline-flex text-decoration-none rounded">Retiro de dinero</a></li>
+                      <li><a href="{% url 'transaccions:transferencia_dinero' %}" class="link-dark d-inline-flex text-decoration-none rounded">Transferencias</a></li>
+                    </ul>
+                </div>
+              </li>
+              <li class="mb-1">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Tarjeta-collapse" aria-expanded="false">
+                  Tarjeta
+                </button>
+                <div class="collapse show" id="Tarjeta-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="{% url 'tarjeta:crear_tarjeta' %}" class="link-dark d-inline-flex text-decoration-none rounded">Nueva tarjeta</a></li>
+                    <li><a href="{% url 'tarjeta:bloquear_tarjeta' %}" class="link-dark d-inline-flex text-decoration-none rounded">Bloquear tarjeta</a></li>
+                    <li><a href="{% url 'tarjeta:estado_tarjeta' %}"  class="link-dark d-inline-flex text-decoration-none rounded">Estado de la tarjeta</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="border-top my-3"></li>
+              <li class="mb-1">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Cuenta-collapse" aria-expanded="false">
+                  Cuenta
+                </button>
+                <div class="collapse show" id="Cuenta-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="{% url 'profiles:editar_datos' %}" class="link-dark d-inline-flex text-decoration-none rounded">Editar datos</a></li>
+                    <li><a href="{% url 'profiles:borrar_cuenta' %}" class="link-dark d-inline-flex text-decoration-none rounded">Borrar cuenta</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        {% endblock %}
+
+        {% block bodycontent %}
+
+        {% endblock %}
+
+        {% block footer %}
+        <section class="foot bg-success text-black">
+            <div class="text-center">
+                Sitio web creado por <i class="fa fa-heart" style="color: red;"></i> LOS REALES</a>    
+                <br>
+                <i></i><a>&copy; Sistema bancario 2022</a>
+            </div>
+        </section>   
+        <style>
+          .foot {
+              position: absolute;
+              bottom: 0px;
+              left: 0px;
+              right: 0px;
+          }
+      </style>
+        {% endblock %}
+        
+        <!-- JS LIBRARIES -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <script src="sidebars.js"></script>
+
+        {% block scriptcontent %}
+        {% endblock %}
+        
+    </body>
+</html>
