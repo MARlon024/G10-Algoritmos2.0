@@ -7,8 +7,8 @@ class Transferencias:
     def __init__(self):
         self.num_cuenta_desde = input("Intoducir cuenta bancaria: ")
         self.num_cuenta_hasta = input("Intoducir cuenta bancaria a transferir: ")
-        self.retiro_cuenta()
-    def retiro_cuenta(self):
+        self.transferencia_cuenta()
+    def transferencia_cuenta(self):
         validar_desde = Validar_num_cuenta(self.num_cuenta_desde)
         validar_hasta = Validar_num_cuenta(self.num_cuenta_hasta)
         if validar_desde.convalidar_num_cuenta() == True and validar_hasta.convalidar_num_cuenta():

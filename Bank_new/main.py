@@ -1,11 +1,13 @@
 from getpass import getpass
 from consultas.db_validar_recepcionista import Db_validar_recepcionista
+from funciones.desafiliar_cuenta import Desafiliar_cuenta
 from funciones.registro_cliente import Registro_cliente
 from funciones.registro_tarjeta_cliente import Registro_tarjeta_cliente
 from funciones.depositar import Depositar
 from funciones.retirar import Retirar
 from funciones.pago_servicios import Pago_servicios
 from funciones.transferencias import Transferencias
+from funciones.pago_servicios import Pago_servicios
 from grupos_menu.menu import *
 from tarjeta_funciones.bloquear_tarjeta import Bloquear_tarjeta
 
@@ -42,7 +44,7 @@ if recepcionista.existe_cuenta_recepcionista():
                 elif opt == 3:
                     Transferencias()
                 elif opt == 4:
-                    pass
+                    Pago_servicios()
                 else:
                     print("Error")
             else:
@@ -54,8 +56,10 @@ if recepcionista.existe_cuenta_recepcionista():
                 Registro_cliente()
             elif opc == 2:
                 Bloquear_tarjeta()  # Validar y el key tbm
+            elif opc == 3:
+                Desafiliar_cuenta()  # Validar y el key tbm
             else:
-                print("3. Salir")
+                print("4. Salir")
     else:
         print("Su contraseña es incorrecta.\n")
 else:

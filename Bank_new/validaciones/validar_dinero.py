@@ -13,4 +13,3 @@ class Validar_dinero:
             return True
         else:
             return False
-        

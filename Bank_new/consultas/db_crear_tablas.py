@@ -183,6 +183,15 @@ def createTableTransferencias():
     conn.commit()
     conn.close()
 
+def createPagoServicios():
+    conn = sqlite3.connect(r'DataBase\banquito.db')
+    cursor = conn.cursor()
+    instruccion = f"INSERT INTO servicios VALUES('123123123', '987654', 'ENEL', '19165814451587', 75, '2023-01-15')"
+    cursor.execute(instruccion)
+    conn.commit()
+    conn.close()
+
+createPagoServicios()
 
 # createDataBase()
 # createTableRecepcionista()
@@ -200,10 +209,3 @@ def createTableTransferencias():
 # insertRowRecepcionista(dni, nombres, ape_Pat, ape_Mat, correo,
 #           fech, cel, oper, user, psw, status)
 # createTableCliente()
-createTableCuentasBancarias()
-createTableTarjetas()
-createTableDepositos()
-createTableRetiros()
-createTableServicios()
-createTableTransferencias()
-createTablePagoServicios()

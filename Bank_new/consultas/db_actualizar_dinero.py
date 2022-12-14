@@ -18,10 +18,7 @@ class Db_actualizar_dinero:
         try:
             cursor = self.conexionCuentas.cursor()
             validar=Db_validar_tabla_depo_reti(self.id,self.num_cuenta,self.dinero,self.fecha,self.hora,self.tabla)
-            if validar.existe_row() ==True:
-                cursor.execute(f"UPDATE '{self.tabla}' SET saldo={self.dinero} WHERE num_cuenta={self.num_cuenta}")
-            else:
-                validar.crear_row()
+            validar.crear_row()
             cursor.execute(f"UPDATE cuentas_bancarias SET saldo={self.dinero} WHERE num_cuenta={self.num_cuenta}")
             self.conexionCuentas.commit()
             self.conexionCuentas.close()
@@ -41,7 +38,6 @@ class Db_actualizar_dinero:
         return id
     
     def mostrar_comprobante(self,monto,text):
-        self.dinero=100
         comprobante=f"""\t \t \t Usted ha {text}: \t S/. {monto}
                 \n \t \t Su nuevo saldo es: {self.dinero} \n
                 \t \t \t FECHA:\n\t \t {self.fecha} \t \t {self.hora}\n
