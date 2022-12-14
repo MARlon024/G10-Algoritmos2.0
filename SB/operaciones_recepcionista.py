@@ -5,7 +5,6 @@ from operaciones.pago_servicios import pagos_servicios
 import funciones
 from tarjeta import *
 
-
 class Operaciones_recepcionista():
     def __init__(self, user_recep, psw_recep):
         self.__user_recep = user_recep
@@ -16,12 +15,10 @@ class Operaciones_recepcionista():
         cursor = conn.cursor()
         cursor.execute(f"SELECT * FROM recepcionistas WHERE usuario='{self.__user_recep}' AND contraseña='{self.__psw_recep}'")  
         product = cursor.fetchall()
-        
         if cursor.fetchone() == False:
             return False
         else:
             return True
-        
     def registrar_cliente(self):
         conn = sqlite3.Connection(self.path)
         cursor = conn.cursor()
@@ -30,37 +27,27 @@ class Operaciones_recepcionista():
         boi = False
         print("-------REGISTRO-------")
         id_cliente = str(uuid.uuid1())  # GENERANDO CODIGO UUID
-        dni=""
-        while (len(dni) != 8 or dni.isnumeric() == False or boi == False):
-            dni = input("DNI: ")
-            dni = dni.strip()
-            cursor.execute(f"SELECT * FROM clientes WHERE dni ={dni}")
-            product = cursor.fetchall()
-            for p in product:
-                veri = p[1]
-            if (len(dni) != 8 or dni.isnumeric() == False):
-                print("Introducir sus 8 dígitos de DNI")
-            else:
-                if (veri == ""):
-                    boi = True
-                else:
-                    print("Ya existe una cuenta bancaria vinculada a este DNI")
-            veri = ""
+        dni = input("DNI: ")
+        dni = dni.strip()
+        cursor.execute(f"SELECT * FROM clientes WHERE dni ={dni}")
+        product = cursor.fetchall()
+        for p in product:
+            veri = p[1]
+        if (self.dni_convalida(dni)):#sisi
+            print("Introducir sus 8 dígitos de DNI")
+        else:
+            if (veri != ""):
+                print("Ya existe una cuenta bancaria vinculada a este DNI")
         nom = input("Nombre: ").capitalize()
         ape_pa = input("Apellido paterno: ").capitalize()
         ape_ma = input("Apellido materno: ").capitalize()
         correo = input("Correo Personal: ")
-        while correo.__contains__("@") != True or correo.__contains__(".") != True:
-            correo = input("Correo Personal: ")
-            if (correo.__contains__("@") == False or correo.__contains__(".") == False):
-                print("Introducir un correo valido ")
-
+        if (correo.__contains__("@") == False or correo.__contains__(".") == False):
+            print("Introducir un correo valido ")
         fecha_nac = input("Fecha de nacimiento: ")
         cel = input("Celular: ")
-        while (len(cel) != 9 or cel.isnumeric() == False):
-            cel = input("Celular: ")
-            if (len(cel) != 9 or cel.isnumeric() == False):
-                print("Introducir sus 9 dígitos de celular")
+        if (len(cel) != 9 or cel.isnumeric() == False):
+            print("Introducir sus 9 dígitos de celular")
         cel_ope = input("Operadora: ")
         num_cuenta = "191" + funciones.generar_numero(11)
         existe = True
@@ -85,16 +72,15 @@ class Operaciones_recepcionista():
         conn.commit()
         conn.close()
         return (f"FELICIDADES {nom} SU CUENTA HA SIDO CREADA. Su numero de cuenta es: {num_cuenta}")
-
+    
     def generar_tarjeta(self):
         dni = input("DNI: ")
         dni = funciones.comprobar_ingreso(dni, 8)
-        RC = Tarjeta("4509xxxxxxxxxxxx", dni)
-        return RC.generar_tarjeta()
+        recep_tarje = Tarjeta("4509xxxxxxxxxxxx", dni)
+        return recep_tarje.generar_tarjeta()
 
     def bloquear_tarjeta(self):
         dni = input("Dni: ")
-        clave = getpass.getpass()
         conn = sqlite3.Connection(self.path)
         cursor = conn.cursor()
         status = "Bloqueada"
@@ -105,9 +91,6 @@ class Operaciones_recepcionista():
         conn.commit()
         conn.close()
         return ("Operacion Realizada con Exito")
-
-    def renovar_tarjeta(self):
-        pass
 
     def transacciones(self):
         continuar=True
@@ -135,3 +118,6 @@ class Operaciones_recepcionista():
                         continue
             except ValueError:
                 return ("\n ERROR: No puede ingresar variables que no sean números \n")    
+def dni_convalida(dni):
+        return True if len(dni) != 8 or dni.isnumeric() == False else False
+        
