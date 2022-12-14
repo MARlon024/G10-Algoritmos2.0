@@ -1,0 +1,3 @@
+bootstrap_themes (para las templates)
+django (no c)
+python (la última versión :V)

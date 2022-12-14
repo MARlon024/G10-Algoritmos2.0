@@ -79,8 +79,7 @@
                         
                         {% csrf_token %}
                         {{ form2 }}
-                        Prove you are human
-                        <div class="g-recaptcha" data-sitekey="6Ld_qjQUAAAAADjv2scrqpvXK4OrBZALRJFMANpP"></div>
+                        
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -95,7 +94,6 @@
 {% endblock %}
 
 {% block scriptcontent %}
-    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
         $(".current").removeClass("current");
         $("#details").addClass("current");

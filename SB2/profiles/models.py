@@ -1,7 +1,6 @@
 from django.db import models
 
 class DatosGenerales(models.Model):
-    id = models.CharField(max_length = 10, primary_key=True)
     nombres = models.CharField(max_length=50)
     dni = models.IntegerField()
     apellido_paterno = models.CharField(max_length=50)

@@ -9,3 +9,11 @@ class TransferenciasForm(forms.ModelForm):
             "ingresar_numero_cuenta_destino",
             "ingresar_monto",
             ]
+            
+class Depositos_RetirosForm(forms.ModelForm):
+    class Meta:
+        model = models.Depositos_Retiros
+        fields = [
+            "ingresar_usuario",
+            "ingresar_monto"
+            ]

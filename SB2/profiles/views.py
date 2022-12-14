@@ -68,7 +68,5 @@ def editar_datos(request):
     return render(request, "editar_datos.html", diccionario_forms)
 
 def borrar_cuenta(request):
-    usuario_actual=models.DatosGenerales.objects.get(nombres=request.user)
-    usuario_actual.delete()
     return render(request,"borrar_cuenta.html")
 

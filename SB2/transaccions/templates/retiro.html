@@ -31,18 +31,19 @@
 
 {% block bodycontent %}
     <section id="welcome_post" class="col-9">
-        <h2 class="container text-center">Bienvenido al módulo de transferencias de dinero, <span id="nombre_usuario">{{ user }}</span></h2>
-        <form action="{ url 'transaccions:transferencia_dinero }" method="post">
+        <h2 class="container text-center">Bienvenido al módulo de retiro, <span id="nombre_usuario">{{ user }}</span></h2>
+        <form action="{ url 'transaccions:retiro }" method="post">
             {% csrf_token %}
 
             <h4 style="font-weight: 200;">
                 {{ form }}
             </h4>
             <br>
-            <small>Al transferir dinero desde su cuenta, acepta los <a href="#">Términos y condiciones</a> de transferencia de dinero</small>. <br>
-            <button type="submit" class="btn btn-danger">Transferir dinero</button>
+            <small>Al retirar dinero de su cuenta, acepta los <a href="#">Términos y condiciones</a> de retiro</small>. <br>
+            <button type="submit" class="btn btn-danger">Retirar dinero</button>
         </form>
     </section>
+    <br><br><br><br><br><br><br><br><br><br><br>
 {% endblock %}
 
 {% block scriptcontent %}
