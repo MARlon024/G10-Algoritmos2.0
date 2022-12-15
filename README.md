@@ -42,3 +42,6 @@
 # Dirigirse a la carpeta SB2
 # Migrar el archivo manage: python manage.py migrate
 # Luego, correr el servidor: python manage.py runserver
+# En la web registrarse e iniciar sesion.
+# Luego se dirige al index del usuario, en la pantalla se mostrara el numero de cuenta, su saldo, y tipo de cuenta.
+# En el parte izquierda en el index del usuario se muestra algunas operaciones que el usuario puede realizar.
