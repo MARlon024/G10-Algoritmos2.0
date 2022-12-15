@@ -29,3 +29,16 @@
 #   Se le mostrará un menú de opciones para que el recepcionista pueda realizar las operaciones correspondientes:
 #   El programa empezará a ejecutarse de acuerdo a la opción
 #   Se cierra el programa
+
+# DJANGO
+
+# Requerimientos:
+
+# pip install django
+# pip install django-bootstrap4
+# pip install django-bootstrap-themes
+
+# Pasos:
+# Dirigirse a la carpeta SB2
+# Migrar el archivo manage: python manage.py migrate
+# Luego, correr el servidor: python manage.py runserver
