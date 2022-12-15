@@ -1,10 +1,11 @@
 # G10
 # Integrantes:
+
+# Espinoza Fabian, Josue Marcelo
+# Canecillas Contreras, Juan Mariano
 # Castillo Carranza Jose Richard
-# Espinoza Fabian Josue
-# Peña Manuyama Dafna Nicole
-# Durand Caracuzma Marlon
-# Canecillas Contreras, Juan
+# Durand Caracuzma, Marlon
+# Peña Manuyama, Dafna Nicole
 
 # Repositorio: https://github.com/MARlon024/G10-Algoritmos2.0
 
@@ -43,5 +44,5 @@
 # Migrar el archivo manage: python manage.py migrate
 # Luego, correr el servidor: python manage.py runserver
 # En la web registrarse e iniciar sesion.
-# Luego se dirige al index del usuario, en la pantalla se mostrara el numero de cuenta, su saldo, y tipo de cuenta.
+# Luego se dirige automaticamente al index del usuario, en la pantalla se mostrara el numero de cuenta, su saldo, y tipo de cuenta.
 # En el parte izquierda en el index del usuario se muestra algunas operaciones que el usuario puede realizar.
