@@ -11,7 +11,8 @@ class Db_validar_num_cuenta:
     def existe_cuenta(self):
         self.__cursor.execute(f"SELECT num_cuenta FROM {self.__tabla} WHERE num_cuenta={self.__num_cuenta}")
         num_cuenta = self.__cursor.fetchone()
-        if num_cuenta == "":
+        print(num_cuenta)
+        if num_cuenta == None:
             return False
         else:
             return True  
