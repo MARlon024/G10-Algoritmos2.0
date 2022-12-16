@@ -13,7 +13,6 @@ class Db_validar_num_cuenta:
         num_cuenta = self.__cursor.fetchone()
         if num_cuenta == "":
             return False
-            
         else:
             return True  
 
