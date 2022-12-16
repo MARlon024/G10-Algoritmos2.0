@@ -8,7 +8,7 @@ from funciones.retirar import Retirar
 from funciones.pago_servicios import Pago_servicios
 from funciones.transferencias import Transferencias
 from grupos_menu.menu import *
-from tarjeta_funciones.bloquear_tarjeta import Bloquear_tarjeta
+from funciones.bloquear_tarjeta import Bloquear_tarjeta
 class Main:
     def presentacion(self):
         print("\n ======")
