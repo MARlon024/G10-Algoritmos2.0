@@ -1,10 +1,10 @@
 ### GRUPO 10 - BANQUITO
-**INTEGRANTES:**
--👨 Canecillas Contreras, Juan Mariano
--👨 Castillo Carranza Jose Richard
--👨 Durand Caracuzma, Marlon
--👨 Espinoza Fabian, Josue Marcelo
--👩 Peña Manuyama, Dafna Nicole
+#### **INTEGRANTES:**
+- Canecillas Contreras, Juan Mariano
+- Castillo Carranza Jose Richard
+- Durand Caracuzma, Marlon
+- Espinoza Fabian, Josue Marcelo
+- Peña Manuyama, Dafna Nicole
 
 #### INSTALACIÓN PARA WINDOWS 
 
