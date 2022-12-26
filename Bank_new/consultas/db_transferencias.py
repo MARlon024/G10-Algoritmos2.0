@@ -57,5 +57,5 @@ class Db_transferencias:
         
         path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'#Cambiar la ubicación donde el programa ha sido instalado
         config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-        pdfkit.from_string(comprobante, f"PDF\Comprobante_{self.id}.pdf",configuration=config)
+        pdfkit.from_string(comprobante, f"comprobantes\Comprobante_{self.id}.pdf",configuration=config)
         print("PDF file saved.")
